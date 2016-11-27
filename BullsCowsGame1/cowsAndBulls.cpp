@@ -33,9 +33,10 @@ void FCowsAndBulls::AddWords(FString Word)
 
  int32 FCowsAndBulls::GetCurrentTry() 
 {
-	CurrentTry++;
-	if (CurrentTry > MaxTry)
+
+	if (CurrentTry >= MaxTry)
 		State = EGameState::Lost;
+	CurrentTry++;
 	return CurrentTry;
 }
 

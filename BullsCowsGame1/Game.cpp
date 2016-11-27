@@ -16,7 +16,7 @@ It is responsible for all user interation
 
 FBullsGame::FBullsGame()
 {
-	
+
 }
 
 void FBullsGame::InitializeWords()
@@ -26,7 +26,7 @@ void FBullsGame::InitializeWords()
 	OCowsAndBulls.AddWords("orange");
 	OCowsAndBulls.AddWords("blue");
 	OCowsAndBulls.AddWords("black");
-	OCowsAndBulls.AddWords("gray"); 
+	OCowsAndBulls.AddWords("gray");
 }
 
 
@@ -43,63 +43,79 @@ void FBullsGame::ResetGame(int MaximumTry)
 
 void FBullsGame::Play()
 {
-		FText CurrentWord = OCowsAndBulls.GetNextWord();
-		FText WordGuessed;
+	FText CurrentWord = OCowsAndBulls.GetNextWord();
+	FText WordGuessed;
 
-		int32 length = CurrentWord.length();
-		int32 trytotal = OCowsAndBulls.GetMaxTry();
-		int32 currentTry = OCowsAndBulls.GetCurrentTry();
-		while ( currentTry < OCowsAndBulls.GetMaxTry() )
-		{
+	int32 length = CurrentWord.length();
+	int32 trytotal = OCowsAndBulls.GetMaxTry();
+	int32 currentTry = OCowsAndBulls.GetCurrentTry();
 
-			FUtility::PrintOnScreenInfo("Try No.", currentTry);
-			FUtility::PrintOnScreenInfo("Enter an isogram Word to guess that I am thinking of ",length, " Length");
-			std::getline(std::cin, WordGuessed);
-			FUtility::ProcessWord(WordGuessed);
-			EWordState WordState = OCowsAndBulls.GuessWord(WordGuessed);
-			
-			if (WordState == EWordState::OK)
-			{
-				FBullCowCount obj = OCowsAndBulls.CountBullsCows(WordGuessed);
-				FUtility::PrintOnScreenInfo(obj.bulls, "Bulls And ", obj.cows, " Cows");
-
-				//Win Condition
-				if (OCowsAndBulls.GetState() == EGameState::Won)
-				{
-					FUtility::PrintOnScreenInfo("You Won the Game with ", OCowsAndBulls.GetMaxTry() - currentTry, "left");
-					break;
-				}
-			}
-			else if (WordState == EWordState::Invalid)
-			{
-				FUtility::PrintOnScreenInfo("Not a Valid Choice .No Special Character allowed");
-			}
-			else if (WordState == EWordState::Not_isogram)
-			{
-				FUtility::PrintOnScreenInfo("Not a valid choice. Enter word not containing same letter !!! ");
-			}
-			else if (WordState == EWordState::NotValidLength)
-			{
-				FUtility::PrintOnScreenInfo("Guessed Word Length is too short or too long ");
-			}
-		}
-		if (OCowsAndBulls.GetState() == EGameState::Lost)
-			FUtility::PrintOnScreenInfo("Sorry You Lost :|");
+	while (currentTry <= OCowsAndBulls.GetMaxTry()&&OCowsAndBulls.GetState()!=EGameState::Won)
+	{
 		
+		FUtility::PrintOnScreenInfo("Try No.", currentTry, " of ",OCowsAndBulls.GetMaxTry());
+		FUtility::PrintOnScreenInfo("Enter an isogram Word to guess that I am thinking of ", length, " Length\n");
+		std::getline(std::cin, WordGuessed);
+		FUtility::ProcessWord(WordGuessed);
+		EWordState WordState = OCowsAndBulls.GuessWord(WordGuessed);
+
+		switch (WordState)
+		{
+		case EWordState::OK:
+		{
+			FBullCowCount obj = OCowsAndBulls.CountBullsCows(WordGuessed);
+			FUtility::PrintOnScreenInfo(obj.bulls, "Bulls And ", obj.cows, " Cows\n");
+		}
+		break;
+
+		case EWordState::Invalid:
+			FUtility::PrintOnScreenInfo("Not a Valid Choice .No Special Character allowed\n");
+			break;
+
+		case EWordState::Not_isogram:
+			FUtility::PrintOnScreenInfo("Not a valid choice. Enter word not containing same letter !!!\n ");
+			break;
+
+		case EWordState::NotValidLength:
+			FUtility::PrintOnScreenInfo("Guessed Word Length is too short or too long \n");
+			break;
+		}
+
 		currentTry = OCowsAndBulls.GetCurrentTry();
+				
+	}
+	if (OCowsAndBulls.GetState() == EGameState::Lost)
+	{
+		FUtility::PrintOnScreenInfo("Sorry You Lost :|");
 	
+	}
+
+	else if (OCowsAndBulls.GetState() == EGameState::Won)
+	{
+		FUtility::PrintOnScreenInfo("You Won the Game with ", OCowsAndBulls.GetMaxTry() -currentTry + 1, "left");
+	
+	}
+
+
+	
+
+
+
+
 }
 
 void FBullsGame::StartGame()
 {
 	FBullsGame  OGameobject;
 
+	FUtility::PrintOnScreenInfo("Welcome To Bulls and Cows Game \n\n");
+
 	bool bWantsToPlayAgain = false;
 	do
 	{
-	OGameobject.ResetGame(5);
-	OGameobject.Play();
-	bWantsToPlayAgain = FUtility::PlayAgain();
+		OGameobject.ResetGame(5);
+		OGameobject.Play();
+		bWantsToPlayAgain = FUtility::PlayAgain();
 
 	} while (bWantsToPlayAgain);
 
