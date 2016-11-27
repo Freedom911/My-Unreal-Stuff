@@ -85,7 +85,7 @@ EWordState FCowsAndBulls::GuessWord(const FString &GuessedWord)
 	if (!HasCorrectLength(GuessedWord))
 	{
 		CurrentTry--;
-		return EWordState::Invalid;
+		return EWordState::NotValidLength;
 	}
 
 	return EWordState::OK;
