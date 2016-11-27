@@ -33,7 +33,6 @@ void FCowsAndBulls::AddWords(FString Word)
 
  int32 FCowsAndBulls::GetCurrentTry() 
 {
-
 	if (CurrentTry >= MaxTry)
 		State = EGameState::Lost;
 	CurrentTry++;
@@ -48,12 +47,17 @@ void FCowsAndBulls::SetMaxTry(int32 tryLimit)
 FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord) 
 {
 	FBullCowCount st_bullcowCount;
-	for (int32 i = 0; i < CurrentWord.length(); i++)
+
+	//Compares Guessed Word with Current Word
+	//and compares character by character
+	for (int32 i = 0; i < GuessedWord.length(); i++)
 	{
-		for (int32 j = 0; j < GuessedWord.length(); j++)
+		for (int32 j = 0; j < CorrectWord.length(); j++)
 		{
-			if (CurrentWord[i] == GuessedWord[j])
+			if (CorrectWord[j] == GuessedWord[i])
 			{
+				//If character present but not on same position
+				//Then it must be cow
 				if (i != j)
 					st_bullcowCount.cows++;
 				else
@@ -62,7 +66,10 @@ FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 			}
 		}
 	}
-	if (st_bullcowCount.bulls == CurrentWord.length())
+
+	//if number of bulls equal to Current Word length then 
+	//State of Game is changed to Won
+	if (st_bullcowCount.bulls == CorrectWord.length())
 	{
 		State = EGameState::Won;
 	}
@@ -94,6 +101,7 @@ EWordState FCowsAndBulls::GuessWord(const FString &GuessedWord)
 //Scope for optimization
 bool FCowsAndBulls::isIsogram(const FString &GuessedWord) const
 {
+	//checks if repeating character is present
 	for (int i = 0; i < GuessedWord.length(); i++)
 	{
 		for (int j = 0; j < GuessedWord.length(); j++)
@@ -119,7 +127,7 @@ bool FCowsAndBulls::IsValid(const FString &GuessedWord) const
 
 bool FCowsAndBulls::HasCorrectLength(const FString &GuessedWord) const
 {
-	return GuessedWord.length() == CurrentWord.length() ? true : false;
+	return GuessedWord.length() == CorrectWord.length() ? true : false;
 }
 
 FString FCowsAndBulls::GetNextWord()
@@ -131,7 +139,7 @@ FString FCowsAndBulls::GetNextWord()
 		{
 			index = rand() % Words.size();
 			if (Words[index].size() > 0) {
-				CurrentWord = Words[index];
+				CorrectWord = Words[index];
 				return Words[index];
 			}
 			

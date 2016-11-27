@@ -35,7 +35,7 @@ private:
 
 	int32 MaxTry;
 	int32 CurrentTry;
-	FString CurrentWord;
+	FString CorrectWord;
 	EGameState  State;
 	std::vector<FString>Words;
 
