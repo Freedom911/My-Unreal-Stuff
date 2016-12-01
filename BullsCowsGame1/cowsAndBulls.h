@@ -1,6 +1,8 @@
 #pragma once
 #include<string>
 #include<vector>
+#include <map>
+#define TMap std::map
 
 using FString = std::string;
 using int32 = int;
@@ -39,8 +41,9 @@ private:
 	EGameState  State;
 	std::vector<FString>Words;
 
+
 	/**Returns True if the word can be isogram*/
-	bool isIsogram(const FString&GuessedWord)const;
+	bool isIsogram(FString&GuessedWord) const;
 
 	/**Returns True if the Word doesnot contains digits or special character*/
 	bool IsValid(const FString&GuessedWord)const;
@@ -62,7 +65,7 @@ public:
 	FString GetNextWord();
     
 	/**Check if Guessed Word is valid */
-	EWordState GuessWord(const FString &GuessedWord);
+	EWordState CheckValidGuess(FString &GuessedWord);
 
 	/**Returns Number of Cows and Bulls*/
 	FBullCowCount CountBullsCows(const FString &GuessedWord);

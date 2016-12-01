@@ -61,7 +61,7 @@ void FBullsGame::Play()
 		FUtility::ProcessWord(WordGuessed);
 
 		//Check is Word entered is valid
-		EWordState WordState = OCowsAndBulls.GuessWord(WordGuessed);
+		EWordState WordState = OCowsAndBulls.CheckValidGuess(WordGuessed);
 
 		switch (WordState)
 		{
@@ -102,11 +102,12 @@ void FBullsGame::StartGame()
 {
 	FBullsGame  OGameobject;
 
-	FUtility::PrintOnScreenInfo("Welcome To Bulls and Cows Game \n\n");
+	
 
 	bool bWantsToPlayAgain = false;
 	do
 	{
+		FUtility::PrintOnScreenInfo("Welcome To Bulls and Cows Game \n\n");
 		OGameobject.ResetGame(5);
 		OGameobject.Play();
 		bWantsToPlayAgain = FUtility::PlayAgain();

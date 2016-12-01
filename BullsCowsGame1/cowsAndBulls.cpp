@@ -76,7 +76,7 @@ FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 	return st_bullcowCount;
 }
 
-EWordState FCowsAndBulls::GuessWord(const FString &GuessedWord)
+EWordState FCowsAndBulls::CheckValidGuess(FString &GuessedWord)
 {
 	if (!isIsogram(GuessedWord))
 	{    
@@ -99,20 +99,33 @@ EWordState FCowsAndBulls::GuessWord(const FString &GuessedWord)
 	return EWordState::OK;
 }
 //Scope for optimization
-bool FCowsAndBulls::isIsogram(const FString &GuessedWord) const
+bool FCowsAndBulls::isIsogram(FString &GuessedWord) const
 {
+	//Store each character and int 0 value in tmap
+	//check with each character.if more than 1 found then false
 	//checks if repeating character is present
-	for (int i = 0; i < GuessedWord.length(); i++)
+   TMap<char, bool>alphaMap;
+   TMap<char, bool>::iterator it;
+
+
+   for (int i = 0; i < 26; i++)
+   {
+	   char c = (i + 1) + 96;
+	   bool value = false;
+	   alphaMap[c] = value;
+   }
+
+     for (int i = 0; i < GuessedWord.length(); i++)
 	{
-		for (int j = 0; j < GuessedWord.length(); j++)
+		it = alphaMap.find(GuessedWord[i]);
+		if (it != alphaMap.end())
 		{
-			if (i != j)
+			//means true
+			if (it->second)
 			{
-				if (GuessedWord[i] == GuessedWord[j])
-				{
-					return false;
-				}
+				return false;
 			}
+			it->second = true;
 		}
 	}
 	return true;
@@ -155,6 +168,7 @@ void FCowsAndBulls::Reset()
 	MaxTry = 0;
 	CurrentTry = 0;
 	Words.clear();
+
 
 }
 
