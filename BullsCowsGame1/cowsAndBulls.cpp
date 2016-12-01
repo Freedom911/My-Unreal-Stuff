@@ -104,29 +104,33 @@ bool FCowsAndBulls::isIsogram(FString &GuessedWord) const
 	//Store each character and int 0 value in tmap
 	//check with each character.if more than 1 found then false
 	//checks if repeating character is present
-	//for 0 and 1 length
-	//It is isogram
-	if (GuessedWord.length() <= 1)
-	{
-		return true;
-	}
-	TMap<char, bool>alphaMap;
+   TMap<char, bool>alphaMap;
+   TMap<char, bool>::iterator it;
 
-	for (auto Cword : GuessedWord)
+
+   for (int i = 0; i < 26; i++)
+   {
+	   char c = (i + 1) + 96;
+	   bool value = false;
+	   alphaMap[c] = value;
+   }
+
+     for (int i = 0; i < GuessedWord.length(); i++)
 	{
-		//Check if letter already present then
-		//Return
-		if (alphaMap[Cword]){  //If the letter is already Present
-			return false;
-		} else {
-			alphaMap[Cword] = true;
+		it = alphaMap.find(GuessedWord[i]);
+		if (it != alphaMap.end())
+		{
+			//means true
+			if (it->second)
+			{
+				return false;
+			}
+			it->second = true;
 		}
-
 	}
-
 	return true;
 }
-  
+
 //Checks if guessed Word  doesnot contains invalid character
 bool FCowsAndBulls::IsValid(const FString &GuessedWord) const
 {
