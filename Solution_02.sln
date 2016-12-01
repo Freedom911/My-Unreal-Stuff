@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BullsAndCows", "BullsAndCows\BullsAndCows.vcxproj", "{239B1784-943D-415B-83B9-76D2340E5D4D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BullsCowsGame1", "BullsCowsGame1\BullsCowsGame1.vcxproj", "{AC10E1AB-CE28-4947-898D-A0E2DBDF3AC2}"
 EndProject
 Global
@@ -15,14 +13,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Debug|x64.ActiveCfg = Debug|x64
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Debug|x64.Build.0 = Debug|x64
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Debug|x86.ActiveCfg = Debug|Win32
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Debug|x86.Build.0 = Debug|Win32
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Release|x64.ActiveCfg = Release|x64
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Release|x64.Build.0 = Release|x64
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Release|x86.ActiveCfg = Release|Win32
-		{239B1784-943D-415B-83B9-76D2340E5D4D}.Release|x86.Build.0 = Release|Win32
 		{AC10E1AB-CE28-4947-898D-A0E2DBDF3AC2}.Debug|x64.ActiveCfg = Debug|x64
 		{AC10E1AB-CE28-4947-898D-A0E2DBDF3AC2}.Debug|x64.Build.0 = Debug|x64
 		{AC10E1AB-CE28-4947-898D-A0E2DBDF3AC2}.Debug|x86.ActiveCfg = Debug|Win32
