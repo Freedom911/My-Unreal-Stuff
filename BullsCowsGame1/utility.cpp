@@ -22,13 +22,14 @@ void FUtility::ProcessWord(std::string &GuessedWord)
 bool FUtility::PlayAgain()
 {
 	char choice = 'n';
-	FText Message = "Play Again Fellow Person";
+	FText Message = "Play Again Fellow Person (Y/N) ?";
 	PrintOnScreenInfo(Message);
 	std::cin >> choice;
 	std::cin.ignore();
 	tolower(choice);
 	if (choice == 'y'||choice =='Y')
 	{
+		PrintOnScreenInfo("\n");
 		return true;
 	}
 	else if (choice == 'n'||choice =='N')
