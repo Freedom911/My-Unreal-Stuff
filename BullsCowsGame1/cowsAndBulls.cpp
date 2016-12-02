@@ -26,12 +26,12 @@ void FCowsAndBulls::AddWords(FString Word)
 }
 
 
- int32 FCowsAndBulls::GetMaxTry() const
+int32 FCowsAndBulls::GetMaxTry() const
 {
 	return MaxTry;
 }
 
- int32 FCowsAndBulls::GetCurrentTry() 
+int32 FCowsAndBulls::GetCurrentTry()
 {
 	if (CurrentTry >= MaxTry)
 		State = EGameState::Lost;
@@ -39,12 +39,12 @@ void FCowsAndBulls::AddWords(FString Word)
 	return CurrentTry;
 }
 
-void FCowsAndBulls::SetMaxTry(int32 tryLimit) 
+void FCowsAndBulls::SetMaxTry(int32 tryLimit)
 {
 	MaxTry = tryLimit;
 }
 
-FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord) 
+FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 {
 	FBullCowCount st_bullcowCount;
 
@@ -62,7 +62,7 @@ FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 					st_bullcowCount.cows++;
 				else
 					st_bullcowCount.bulls++;
-					
+
 			}
 		}
 	}
@@ -79,13 +79,13 @@ FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 EWordState FCowsAndBulls::CheckValidGuess(FString &GuessedWord)
 {
 	if (!isIsogram(GuessedWord))
-	{    
+	{
 		CurrentTry--;
 		return EWordState::Not_isogram;
 	}
 
 	if (!IsValid(GuessedWord))
-	{ 
+	{
 		CurrentTry--;
 		return EWordState::Invalid;
 	}
@@ -104,30 +104,27 @@ bool FCowsAndBulls::isIsogram(FString &GuessedWord) const
 	//Store each character and int 0 value in tmap
 	//check with each character.if more than 1 found then false
 	//checks if repeating character is present
-   TMap<char, bool>alphaMap;
-   TMap<char, bool>::iterator it;
-
-
-   for (int i = 0; i < 26; i++)
-   {
-	   char c = (i + 1) + 96;
-	   bool value = false;
-	   alphaMap[c] = value;
-   }
-
-     for (int i = 0; i < GuessedWord.length(); i++)
+	//for 0 and 1 length
+	//It is isogram
+	if (GuessedWord.length() <= 1)
 	{
-		it = alphaMap.find(GuessedWord[i]);
-		if (it != alphaMap.end())
-		{
-			//means true
-			if (it->second)
-			{
-				return false;
-			}
-			it->second = true;
-		}
+		return true;
 	}
+	TMap<char, bool>alphaMap;
+
+	for (auto Cword : GuessedWord)
+	{
+		//Check if letter already present then
+		//Return
+		if (alphaMap[Cword]) {  //If the letter is already Present
+			return false;
+		}
+		else {
+			alphaMap[Cword] = true;
+		}
+
+	}
+
 	return true;
 }
 
@@ -147,17 +144,17 @@ FString FCowsAndBulls::GetNextWord()
 {
 	//Get random number from 0 to Words size -1
 
-		int32 index = -1;
-		while (true)
-		{
-			index = rand() % Words.size();
-			if (Words[index].size() > 0) {
-				CorrectWord = Words[index];
-				return Words[index];
-			}
-			
+	int32 index = -1;
+	while (true)
+	{
+		index = rand() % Words.size();
+		if (Words[index].size() > 0) {
+			CorrectWord = Words[index];
+			return Words[index];
 		}
-		
+
+	}
+
 }
 
 void FCowsAndBulls::Reset()
