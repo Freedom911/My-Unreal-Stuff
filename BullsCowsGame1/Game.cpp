@@ -49,13 +49,14 @@ void FBullsGame::Play()
 	int32 length = CurrentWord.length();
 	int32 trytotal = OCowsAndBulls.GetMaxTry();
 	int32 currentTry = OCowsAndBulls.GetCurrentTry();
+	FUtility::PrintOnScreenInfo("Can You Guess a " ,length , " letter isogram Word");
 
 	//Run the game while chances are left and the game is not won
 	while (currentTry <= OCowsAndBulls.GetMaxTry()&&OCowsAndBulls.GetState()!=EGameState::Won)
 	{
 		
 		FUtility::PrintOnScreenInfo("Try No.", currentTry, " of ",OCowsAndBulls.GetMaxTry());
-		FUtility::PrintOnScreenInfo("Enter an isogram Word to guess that I am thinking of ", length, " Length\n");
+		FUtility::PrintOnScreenInfo("\nYour Guess:");
 		std::getline(std::cin, WordGuessed);
 		//Convert to lower Case String
 		FUtility::ProcessWord(WordGuessed);
