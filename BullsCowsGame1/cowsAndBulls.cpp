@@ -28,21 +28,18 @@ void FCowsAndBulls::AddWords(FString Word)
 
 int32 FCowsAndBulls::GetMaxTry() const
 {
-	return MaxTry;
+	TMap<int, int>Maximum{ {3,4}, {4,7}, {5,10},{6,10}, {7,15}, {8,25} };
+	return Maximum [CorrectWord.length()];
 }
 
 int32 FCowsAndBulls::GetCurrentTry()
 {
-	if (CurrentTry >= MaxTry)
+	if (CurrentTry >= GetMaxTry())
 		State = EGameState::Lost;
 	CurrentTry++;
 	return CurrentTry;
 }
 
-void FCowsAndBulls::SetMaxTry(int32 tryLimit)
-{
-	MaxTry = tryLimit;
-}
 
 FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 {
@@ -161,8 +158,6 @@ void FCowsAndBulls::Reset()
 {
 	//Reset GameState
 	State = EGameState::Default;
-	//Reset Max Number of Try
-	MaxTry = 0;
 	CurrentTry = 0;
 	Words.clear();
 

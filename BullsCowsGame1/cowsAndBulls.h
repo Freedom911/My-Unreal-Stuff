@@ -34,8 +34,6 @@ class FCowsAndBulls
 {
 
 private:
-
-	int32 MaxTry;
 	int32 CurrentTry;
 	FString CorrectWord;
 	EGameState  State;
@@ -78,9 +76,6 @@ public:
 
 	/**Reset State ,Maximum Try and Current Try and List*/
 	void Reset();
-
-	/**Set Maximum Try available */
-	void SetMaxTry(int32 tryLimit);
 
 	/** Returns State */
 	EGameState GetState() const;

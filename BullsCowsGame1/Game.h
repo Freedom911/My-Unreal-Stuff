@@ -14,7 +14,7 @@ private:
 	void InitializeWords();
 
 	/**Resets Game */
-	void ResetGame(int maxTry);
+	void ResetGame();
     
 	/**Contains Implementation of the game */
 	void Play();

@@ -30,13 +30,12 @@ void FBullsGame::InitializeWords()
 }
 
 
-void FBullsGame::ResetGame(int MaximumTry)
+void FBullsGame::ResetGame()
 {
 	//Reset State first
 	//Initialize Words
 	//Set Maximum Try Amount
 	OCowsAndBulls.Reset();
-	OCowsAndBulls.SetMaxTry(MaximumTry);
 	InitializeWords();
 
 }
@@ -109,7 +108,7 @@ void FBullsGame::StartGame()
 	do
 	{
 		FUtility::PrintOnScreenInfo("Welcome To Bulls and Cows Game \n\n");
-		OGameobject.ResetGame(5);
+		OGameobject.ResetGame();
 		OGameobject.Play();
 		bWantsToPlayAgain = FUtility::PlayAgain();
 
