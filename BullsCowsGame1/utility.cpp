@@ -14,6 +14,7 @@ FUtility::~FUtility()
 {
 }
 
+//Converts to LowerCase to make sure that player is not forced to Uppercase or Lowercase
 void FUtility::ProcessWord(std::string &GuessedWord)
 {
 	std::transform(GuessedWord.begin(), GuessedWord.end(), GuessedWord.begin(), ::tolower);

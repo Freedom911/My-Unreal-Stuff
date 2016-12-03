@@ -1,9 +1,12 @@
+/*Contains Rules ,setter and getter for game
+*/
 #pragma once
 #include<string>
 #include<vector>
 #include <map>
 #define TMap std::map
 
+//to Make syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -51,7 +54,6 @@ private:
 
 public:
 	FCowsAndBulls();
-	~FCowsAndBulls();
 
 	/**Returns Maximum Try allowed*/
 	int32 GetMaxTry() const;

@@ -1,7 +1,10 @@
-//utility.h Contains common Functions
+/*utility.h Contains common Functionality
+*/
+
 #pragma once
 #include<string>
 
+//Using this syntax to make Unreal Friendly
 using FText = std::string;
 using int32 = int;
 
@@ -12,7 +15,7 @@ public:
 
 	~FUtility();
 
-	//Coverts a Word  lowercase
+	/**Coverts a Word  to lowercase*/
     static void ProcessWord(std::string &GuessedWord);
 
 	/**  Function for asking Player to Play again*/
@@ -39,3 +42,4 @@ public:
 	}
 
 };
+

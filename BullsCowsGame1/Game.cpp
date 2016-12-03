@@ -34,12 +34,11 @@ void FBullsGame::ResetGame()
 {
 	//Reset State first
 	//Initialize Words
-	//Set Maximum Try Amount
 	OCowsAndBulls.Reset();
 	InitializeWords();
 
 }
-
+//Plays a single game
 void FBullsGame::Play()
 {
 	FText CurrentWord = OCowsAndBulls.GetNextWord();
@@ -51,16 +50,17 @@ void FBullsGame::Play()
 	FUtility::PrintOnScreenInfo("Can You Guess a " ,length , " letter isogram Word");
 
 	//Run the game while chances are left and the game is not won
-	while (currentTry <= OCowsAndBulls.GetMaxTry()&&OCowsAndBulls.GetState()!=EGameState::Won)
+	while (currentTry <= OCowsAndBulls.GetMaxTry() && OCowsAndBulls.GetState() != EGameState::Won)
 	{
 		
 		FUtility::PrintOnScreenInfo("Try No.", currentTry, " of ",OCowsAndBulls.GetMaxTry());
 		FUtility::PrintOnScreenInfo("\nYour Guess:");
 		std::getline(std::cin, WordGuessed);
+
 		//Convert to lower Case String
 		FUtility::ProcessWord(WordGuessed);
 
-		//Check is Word entered is valid
+		//Check if Word entered is valid
 		EWordState WordState = OCowsAndBulls.CheckValidGuess(WordGuessed);
 
 		switch (WordState)
@@ -75,11 +75,11 @@ void FBullsGame::Play()
 
 		//if word contains characters other than alphabets
  		case EWordState::Invalid:
-			FUtility::PrintOnScreenInfo("Not a Valid Choice .No Special Character allowed\n");
+			FUtility::PrintOnScreenInfo("No Special Character allowed\n");
 			break;
     
 		case EWordState::Not_isogram:
-			FUtility::PrintOnScreenInfo("Not a valid choice. Enter word not containing same letter !!!\n ");
+			FUtility::PrintOnScreenInfo("Enter word not containing same letter !!!\n ");
 			break;
 
 		case EWordState::NotValidLength:
@@ -114,10 +114,5 @@ void FBullsGame::StartGame()
 
 	} while (bWantsToPlayAgain);
 
-
-}
-
-FBullsGame::~FBullsGame()
-{
-
+	//exit the game
 }

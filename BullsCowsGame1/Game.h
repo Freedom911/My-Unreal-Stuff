@@ -1,7 +1,11 @@
+/*Contains the implementation of Logic for the Game
+*/
+
 #pragma once
 #include <string>
 #include "cowsAndBulls.h"
 
+//Using this syntax to make Unreal Friendly
 using FText = std::string;
 using int32 = int;
 
@@ -25,7 +29,6 @@ private:
 
 public:
 	FBullsGame();
-	~FBullsGame();
 
 	/**Function for Starting the Game*/
 	static void StartGame();

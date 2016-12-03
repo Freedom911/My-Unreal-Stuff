@@ -13,13 +13,7 @@ FCowsAndBulls::FCowsAndBulls()
 	Reset();
 
 }
-
-FCowsAndBulls::~FCowsAndBulls()
-{
-
-}
-
-
+//Add list of words from which computer can choose randomly
 void FCowsAndBulls::AddWords(FString Word)
 {
 	Words.push_back(Word);
@@ -28,12 +22,16 @@ void FCowsAndBulls::AddWords(FString Word)
 
 int32 FCowsAndBulls::GetMaxTry() const
 {
+	//Map containing Length of Word and its corresponding Tries
+	//for a word of 3 characters there will be 4 tries
 	TMap<int, int>Maximum{ {3,4}, {4,7}, {5,10},{6,10}, {7,15}, {8,25} };
 	return Maximum [CorrectWord.length()];
 }
 
 int32 FCowsAndBulls::GetCurrentTry()
 {
+	//if Current Try is over the Maximum Tries Available
+	//Then The player has lost the game
 	if (CurrentTry >= GetMaxTry())
 		State = EGameState::Lost;
 	CurrentTry++;
@@ -47,9 +45,9 @@ FBullCowCount FCowsAndBulls::CountBullsCows(const FString &GuessedWord)
 
 	//Compares Guessed Word with Current Word
 	//and compares character by character
-	for (int32 i = 0; i < GuessedWord.length(); i++)
+	for (unsigned  i = 0; i < GuessedWord.length(); i++)
 	{
-		for (int32 j = 0; j < CorrectWord.length(); j++)
+		for (unsigned j = 0; j < CorrectWord.length(); j++)
 		{
 			if (CorrectWord[j] == GuessedWord[i])
 			{
@@ -95,7 +93,7 @@ EWordState FCowsAndBulls::CheckValidGuess(FString &GuessedWord)
 
 	return EWordState::OK;
 }
-//Scope for optimization
+
 bool FCowsAndBulls::isIsogram(FString &GuessedWord) const
 {
 	//Store each character and int 0 value in tmap
@@ -161,7 +159,6 @@ void FCowsAndBulls::Reset()
 	CurrentTry = 0;
 	Words.clear();
 
-
 }
 
 void FCowsAndBulls::SetState(EGameState newState)
@@ -173,3 +170,4 @@ EGameState FCowsAndBulls::GetState() const
 {
 	return State;
 }
+
